@@ -3,7 +3,7 @@ import os
 
 import aws_cdk as cdk
 
-from epona.epona_stack import EponaStack
+from epona_stack.epona_stack import EponaStack
 
 
 app = cdk.App()
