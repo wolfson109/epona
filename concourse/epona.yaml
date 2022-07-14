@@ -1,0 +1,24 @@
+resources:
+  - name: epona-repo
+    type: git
+    source:
+      branch: main
+      uri: https://github.com/wolfson109/epona.git
+
+jobs:
+- name: epona
+  plan:
+  - get: epona-repo
+    trigger: true
+  - task: ls-epona
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      inputs:
+      - name: epona-repo
+      run:
+        path: cat
+        args: ["epona-repo/README.md"]
