@@ -38,6 +38,7 @@ jobs:
         args:
         - -cx
         - |
+          set -e
           cd epona-repo
           cdk synth > ../epona-artifacts/cloudformation.json
           cd ..
