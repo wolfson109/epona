@@ -18,19 +18,25 @@ jobs:
     - put: epona-build-image
       params:
         build: epona-repo
-- name: epona
+- name: epona-build
   plan:
   - get: epona-repo
     trigger: true
-  - task: ls-epona
+  - task: epona-build
     config:
       platform: linux
       image_resource:
         type: registry-image
         source:
-          repository: busybox
+          repository: rhyswheater/epona-build
       inputs:
       - name: epona-repo
+      outputs:
+      - name: epona-artifacts
       run:
-        path: cat
-        args: ["epona-repo/README.md"]
+        path: sh
+        args:
+        - -cx
+        - |
+          aws cdk synth > epona-artifacts/cloudformation.json
+          cat epona-artifacts/cloudformation.json
