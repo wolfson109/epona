@@ -4,8 +4,20 @@ resources:
     source:
       branch: main
       uri: https://github.com/wolfson109/epona.git
+  - name: epona-build-image
+    type: docker-image
+    source:
+      repository: rhyswheater/epona-build
+      username: ((dockerhub-username))
+      password: ((dockerhub-password))
 
 jobs:
+- name: build-and-push-epona-build-image
+  plan:
+    - get: epona-repo
+    - put: epona-build-image
+      params:
+        build: epona-repo
 - name: epona
   plan:
   - get: epona-repo
