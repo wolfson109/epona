@@ -38,5 +38,5 @@ jobs:
         args:
         - -cx
         - |
-          aws cdk synth > epona-artifacts/cloudformation.json
+          cdk synth > epona-artifacts/cloudformation.json
           cat epona-artifacts/cloudformation.json
